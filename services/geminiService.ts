@@ -28,8 +28,14 @@ export const analyzeStatement = async (text: string) => {
     }
   });
 
+  const responseText = response.text;
+  if (!responseText) {
+    console.warn("Gemini returned an empty response.");
+    return [];
+  }
+
   try {
-    const rawData = JSON.parse(response.text);
+    const rawData = JSON.parse(responseText.trim());
     return rawData.map((item: any) => ({
       ...item,
       id: Math.random().toString(36).substr(2, 9),
@@ -37,7 +43,7 @@ export const analyzeStatement = async (text: string) => {
       isWaste: false
     }));
   } catch (error) {
-    console.error("Failed to parse Gemini response:", error);
+    console.error("Failed to parse Gemini response:", error, "Response text was:", responseText);
     return [];
   }
 };
