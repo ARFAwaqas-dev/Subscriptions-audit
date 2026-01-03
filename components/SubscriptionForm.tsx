@@ -10,7 +10,7 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ onAdd }) => {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [category, setCategory] = useState('Entertainment');
-  const [frequency, setFrequency] = useState<UsageFrequency>(UsageFrequency.WEEKLY);
+  const [frequency, setFrequency] = useState<UsageFrequency>(UsageFrequency.DAILY);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,6 +25,8 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ onAdd }) => {
 
     setName('');
     setPrice('');
+    // Reset frequency to default
+    setFrequency(UsageFrequency.DAILY);
   };
 
   return (

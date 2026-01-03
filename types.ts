@@ -2,6 +2,7 @@
 export enum UsageFrequency {
   DAILY = 'Daily',
   WEEKLY = 'Weekly',
+  MONTHLY = 'Monthly',
   RARELY = 'Rarely',
   NEVER = 'Never'
 }

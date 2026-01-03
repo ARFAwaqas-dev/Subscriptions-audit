@@ -10,6 +10,15 @@ import WasteReport from './components/WasteReport';
 const App: React.FC = () => {
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
   const [activeTab, setActiveTab] = useState<'all' | 'waste' | 'add'>('all');
+  const [budget, setBudget] = useState<number>(() => {
+    const saved = localStorage.getItem('subaudit_budget');
+    return saved ? parseFloat(saved) : 100;
+  });
+
+  // Persist budget to localStorage
+  useEffect(() => {
+    localStorage.setItem('subaudit_budget', budget.toString());
+  }, [budget]);
 
   const stats = useMemo(() => {
     const totalMonthly = subscriptions.reduce((sum, s) => sum + s.price, 0);
@@ -18,7 +27,7 @@ const App: React.FC = () => {
     
     return {
       totalMonthly,
-      estimatedWaste: estimatedWaste === 0 && subscriptions.length === 0 ? 17 : estimatedWaste, // Default to $17 if empty
+      estimatedWaste: estimatedWaste === 0 && subscriptions.length === 0 ? 17 : estimatedWaste,
       potentialAnnualSavings: estimatedWaste * 12
     };
   }, [subscriptions]);
@@ -58,7 +67,7 @@ const App: React.FC = () => {
 
       <main className="max-w-6xl mx-auto px-4 mt-8 space-y-8">
         {/* Dashboard Section */}
-        <Dashboard stats={stats} />
+        <Dashboard stats={stats} budget={budget} onUpdateBudget={setBudget} />
 
         {/* Tab Navigation */}
         <div className="flex border-b border-gray-200">

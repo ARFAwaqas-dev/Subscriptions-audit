@@ -39,7 +39,7 @@ export const analyzeStatement = async (text: string) => {
     return rawData.map((item: any) => ({
       ...item,
       id: Math.random().toString(36).substr(2, 9),
-      frequency: UsageFrequency.WEEKLY, // Default to weekly, user can change
+      frequency: UsageFrequency.MONTHLY, // Default to monthly for extracted subscriptions
       isWaste: false
     }));
   } catch (error) {
