@@ -1,0 +1,5 @@
+{
+  "name": "SubAudit - Subscription Savings Tool",
+  "description": "A smart subscription management tool that identifies unused services and helps American consumers eliminate monthly 'zombie' waste using AI-powered bank statement analysis.",
+  "requestFramePermissions": []
+}
